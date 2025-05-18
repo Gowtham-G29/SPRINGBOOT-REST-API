@@ -4,6 +4,8 @@ import com.g_29.restWebservice.restful_web_service.Service.UserService;
 import com.g_29.restWebservice.restful_web_service.model.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +23,17 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+
     @GetMapping("/users/{id}")
-    public ResponseEntity<?> retrieveUserById(@PathVariable int id) {
+    public EntityModel<User> retrieveUserById(@PathVariable int id) {
         User user = service.findUserById(id);
-        if (user == null) {
-            return ResponseEntity.status(404).body("User not found with id: " + id);
-        }
-        return ResponseEntity.ok(user);
+        EntityModel<User>entityModel=EntityModel.of(user);
+
+        WebMvcLinkBuilder link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers());
+        entityModel.add(link.withRel("all-users"));
+
+        return entityModel;
+
     }
 
     @PostMapping("/users")
