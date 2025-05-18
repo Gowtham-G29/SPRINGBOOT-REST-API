@@ -1,6 +1,6 @@
 package com.g_29.restWebservice.restful_web_service.Service;
 
-import com.g_29.restWebservice.restful_web_service.model.User;
+import com.g_29.restWebservice.restful_web_service.entity.User;
 import com.g_29.restWebservice.restful_web_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

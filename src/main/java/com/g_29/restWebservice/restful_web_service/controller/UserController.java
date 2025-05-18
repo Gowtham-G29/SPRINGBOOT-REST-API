@@ -1,7 +1,7 @@
 package com.g_29.restWebservice.restful_web_service.controller;
 
 import com.g_29.restWebservice.restful_web_service.Service.UserService;
-import com.g_29.restWebservice.restful_web_service.model.User;
+import com.g_29.restWebservice.restful_web_service.entity.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

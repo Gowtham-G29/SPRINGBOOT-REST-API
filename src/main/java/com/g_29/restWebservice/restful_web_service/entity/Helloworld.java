@@ -1,4 +1,4 @@
-package com.g_29.restWebservice.restful_web_service.model;
+package com.g_29.restWebservice.restful_web_service.entity;
 
 public class Helloworld {
 
