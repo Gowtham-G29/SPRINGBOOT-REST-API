@@ -4,18 +4,18 @@ import com.g_29.restWebservice.restful_web_service.Service.UserService;
 import com.g_29.restWebservice.restful_web_service.model.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
 
     @Autowired
     private UserService service;
+
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> retrieveAllUsers() {
@@ -25,14 +25,14 @@ public class UserController {
 
 
     @GetMapping("/users/{id}")
-    public EntityModel<User> retrieveUserById(@PathVariable int id) {
-        User user = service.findUserById(id);
-        EntityModel<User>entityModel=EntityModel.of(user);
+    public ResponseEntity<Optional<User>> retrieveUserById(@PathVariable int id) {
+        Optional<User> user = service.findUserById(id);
+//        EntityModel<User>entityModel=EntityModel.of(user);
+//
+//        WebMvcLinkBuilder link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers());
+//        entityModel.add(link.withRel("all-users"));
 
-        WebMvcLinkBuilder link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers());
-        entityModel.add(link.withRel("all-users"));
-
-        return entityModel;
+        return ResponseEntity.status(200).body(user);
 
     }
 
